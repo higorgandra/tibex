@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/tibex/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>tibex</title>
+    <!-- Script para corrigir o roteamento do SPA no GitHub Pages (em conjunto com 404.html) -->
+    <script type="text/javascript">
+      (function() {
+        var redirect = sessionStorage.redirect;
+        delete sessionStorage.redirect;
+        if (redirect && redirect != location.href) {
+          history.replaceState(null, null, redirect);
+        }
+      })();
+    </script>
+    <script type="module" crossorigin src="/tibex/assets/index-l8jyvAJX.js"></script>
+    <link rel="stylesheet" crossorigin href="/tibex/assets/index-iPZVn1Tm.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
