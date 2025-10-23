@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Tibex Redirect</title>
+    <script type="text/javascript">
+      // Pega o caminho da URL que deu 404
+      var path = sessionStorage.getItem('path');
+      sessionStorage.removeItem('path');
+
+      // Se o caminho existir e não for a página inicial, redireciona para o index.html
+      // com o caminho correto para o roteador React poder lidar com ele.
+      if (path && path.substr(0, 1) === "/") {
+        window.location.replace(path);
+      }
+    </script>
+  </head>
+  <body>
+  </body>
+</html>
