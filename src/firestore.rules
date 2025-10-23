@@ -1,0 +1,22 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Regras para a coleção 'orders'
+    match /orders/{orderId} {
+
+      // Um usuário autenticado pode criar seu próprio pedido.
+      allow create: if request.auth != null && request.auth.uid == request.resource.data.userId;
+
+      // Um usuário autenticado pode ler, atualizar ou deletar SEU PRÓPRIO pedido.
+      // O administrador pode fazer o que quiser.
+      allow read, update, delete: if request.auth != null && (request.auth.uid == resource.data.userId || request.auth.uid == 'cAB72OOZXfgffWXh8Kbyxoo3cFo1');
+
+      // Permite que um usuário LISTE (faça query) na coleção 'orders' APENAS se a consulta filtrar pelo seu próprio 'userId'
+      // OU se o usuário for o administrador (que pode listar tudo).
+      allow list: if request.auth != null && (
+        request.query.where.userId == request.auth.uid || request.auth.uid == 'cAB72OOZXfgffWXh8Kbyxoo3cFo1'
+      );
+    }
+  }
+}
