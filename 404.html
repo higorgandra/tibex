@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <title>Tibex Redirect</title>
     <script type="text/javascript">
-      // Pega o caminho da URL que deu 404
-      var path = sessionStorage.getItem('path');
-      sessionStorage.removeItem('path');
-
-      // Se o caminho existir e não for a página inicial, redireciona para o index.html
-      // com o caminho correto para o roteador React poder lidar com ele.
-      if (path && path.substr(0, 1) === "/") {
-        window.location.replace(path);
-      }
+      // Single page app fix for GitHub Pages
+      // https://github.com/rafgraph/spa-github-pages
+      // Pega o caminho da URL que deu 404 e o salva no sessionStorage.
+      var segmentCount = 1; // O base do vite.config.ts é '/tibex/', então temos 1 segmento.
+      var l = window.location;
+      sessionStorage.redirect = l.pathname.split('/').slice(0, 1 + segmentCount).join('/') + '/?p=/' +
+        l.pathname.slice(1).split('/').slice(segmentCount).join('/').replace(/&/g, '~and~') +
+        (l.search ? '&q=' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+        l.hash;
+      // Redireciona para o index.html, que vai ler o sessionStorage.
+      l.replace(l.pathname.split('/').slice(0, 1 + segmentCount).join('/') + '/');
     </script>
   </head>
   <body>
