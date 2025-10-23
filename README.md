@@ -1,2 +1,0 @@
-# tibex
-Tibia Exchange
