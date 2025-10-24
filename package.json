@@ -15,8 +15,6 @@
   "dev": "vite",
   "build": "vite build",
   "deploy": "git add . && git commit -m 'deploy' && git push origin main",
-  "deploy:update": "git add . && git commit -m 'atualização' && git push origin main",
-  "deploy:fix": "git add . && git commit -m 'correção' && git push origin main"
 },
   "dependencies": {
     "firebase": "^12.4.0",
