@@ -11,6 +11,11 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
+  "scripts": {
+  "dev": "vite",
+  "build": "vite build",
+  "deploy": "git add . && git commit -m 'deploy' && git push origin main"
+},
   "dependencies": {
     "firebase": "^12.4.0",
     "lucide-react": "^0.546.0",
