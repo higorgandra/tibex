@@ -1,0 +1,52 @@
+# Nome do Workflow
+name: Deploy to GitHub Pages
+
+# Gatilho (Trigger)
+# Este workflow será executado em cada push para a branch 'main'
+on:
+  push:
+    branches:
+      - main
+
+# Permissões
+# Permite que o workflow faça um commit na branch gh-pages
+permissions:
+  contents: write
+
+# Jobs
+jobs:
+  build-and-deploy:
+    # O tipo de runner (máquina virtual) que o job vai rodar
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout do código
+      # Baixa o código do seu repositório para o runner
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # 2. Setup do Node.js
+      # Configura o ambiente Node.js com a versão especificada
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # Usando uma versão LTS recente
+          cache: 'npm' # Habilita o cache para o npm para acelerar builds futuros
+
+      # 3. Instalar dependências
+      # Instala todas as dependências do projeto
+      - name: Install dependencies
+        run: npm install
+
+      # 4. Build do projeto
+      # Executa o script de build para gerar os arquivos estáticos na pasta 'dist'
+      - name
+        run: npm run build
+
+      # 5. Deploy para a branch gh-pages
+      # Configura o Git e executa o script de deploy
+      - name: Deploy
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          npm run deploy
